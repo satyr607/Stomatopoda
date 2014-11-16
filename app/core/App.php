@@ -7,6 +7,11 @@ class App{
 	protected $method = DEFAULT_METHOD;
 	protected $params = [];
 
+
+/**
+ * pulls the Controller and Method from the URL. Sends the rest as vars
+ */
+
 	function __construct()
 	{
 		$url = $this->parseUrl();
@@ -32,6 +37,10 @@ class App{
 		$this->params = $url ? array_values($url) : [];
 		call_user_func_array([$this->controller, $this->method], $this->params);
 	}
+
+/**
+ * Grabs the current URL and breaks it down into an array that can be used in __construct
+ */
 
 	public function parseUrl()
 	{

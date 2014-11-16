@@ -2,6 +2,10 @@
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 
+/**
+ * Pass all the configs to Eloquent and boot it up
+ */
+
 $capsule =new Capsule();
 
 $capsule->addConnection([
