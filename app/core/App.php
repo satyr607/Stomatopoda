@@ -1,53 +1,31 @@
 <?php
+/**
+ * @Author: satyr
+ * @Date:   2015-02-21 19:29:01
+ * @Last Modified by:   satyr
+ * @Last Modified time: 2015-02-22 12:14:17
+ */
 
 class App{
 
-	//set defaults
-	protected $controller = DEFAULT_CONTROLLER;
-	protected $method = DEFAULT_METHOD;
-	protected $params = [];
-
-
-/**
- * pulls the Controller and Method from the URL. Sends the rest as vars
- */
-
 	function __construct()
 	{
-		$url = $this->parseUrl();
 
-		if(file_exists(DB_PATH_CONT .$url[0]. '.php'))
-		{
-			$this->controller = $url[0];
-			unset($url[0]);
-		}
+		$cont = new Illuminate\Container\Container;
+		Illuminate\Support\Facades\Facade::setFacadeApplication($cont);
 
-		require_once(DB_PATH_CONT .$this->controller. '.php');
-		$this->controller = new $this->controller;
+		$cont['app'] = $cont;
+		$cont['env'] = 'production';
 
-		if(isset($url[1]))
-		{
-			if(method_exists($this->controller, $url[1]))
-			{
-				$this->method = $url[1];
-				unset($url[1]);
-			}
-		}
+		with(new Illuminate\Events\EventServiceProvider($cont))->register();
+		with(new Illuminate\Routing\RoutingServiceProvider($cont))->register();
 
-		$this->params = $url ? array_values($url) : [];
-		call_user_func_array([$this->controller, $this->method], $this->params);
-	}
+		require_once (ROOT . DS . 'App' . DS . 'routes.php');
 
-/**
- * Grabs the current URL and breaks it down into an array that can be used in __construct
- */
+		$request = Illuminate\Http\Request::createFromGlobals();
+		$response = $cont['router']->dispatch($request);
 
-	public function parseUrl()
-	{
-		if(isset($_GET['url']))
-		{
-			return $url = explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
-		}
+		$response->send();
 	}
 
 }

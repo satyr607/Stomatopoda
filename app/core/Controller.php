@@ -1,11 +1,15 @@
 <?php namespace App\Core;
+/**
+ * @Author: satyr
+ * @Date:   2015-02-21 19:29:01
+ * @Last Modified by:   satyr
+ * @Last Modified time: 2015-02-22 12:15:24
+ */
 
 class Controller{
 
-
 /**
  * Grabs the model from the folder defined in config
- * @param [type] $model
  */
 	public function Model($model)
 	{
@@ -13,12 +17,8 @@ class Controller{
 		return new $model();
 	}
 
-
 /**
  * Grabs the View from the folder defined in config + $view var
- * @param  [type] $view
- * @param  [type] $data
- * @return [type]
  */
 	public function view($view, $data = [])
 	{

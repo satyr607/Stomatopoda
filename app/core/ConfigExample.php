@@ -3,7 +3,7 @@
  * @Author: satyr
  * @Date:   2015-02-21 19:29:01
  * @Last Modified by:   satyr
- * @Last Modified time: 2015-02-22 12:12:32
+ * @Last Modified time: 2015-02-22 12:12:55
  */
 
 /**
@@ -18,9 +18,9 @@ define('DEVELOPMENT_ENVIRONMENT',true);
 
 define('DB_DRIVER'    , 'mysql');
 define('DB_HOST'      , 'localhost');
-define('DB_USER'      , 'mvc_root');
-define('DB_PASS'      , 'mvc_root');
-define('DB_DB'        , 'mvc');
+define('DB_USER'      , 'userName');
+define('DB_PASS'      , 'userPass');
+define('DB_DB'        , 'dbName');
 define('DB_CHAR'      , 'utf8');
 define('DB_COLL'      , 'utf8_unicode_ci');
 define('DB_PRE'       , '');
