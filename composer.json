@@ -1,6 +1,7 @@
 {
     "require": {
-        "illuminate/database": "~4.2"
+        "illuminate/database": "~5.0",
+        "illuminate/routing": "~5.0"
     },
     "autoload" : {
     	"classmap" : [
